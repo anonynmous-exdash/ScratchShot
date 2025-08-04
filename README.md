@@ -3,6 +3,7 @@ Use the power of git with your sb3 files. Recommended to use TurboWarp with this
 
 # Tutorial
 Download node.js if you don't already have it.
+Then run `npm i -g adm-zip`
 Just download the repo as a zip file and copy the js file into a folder with a project.sb3 file. Then open command prompt and run `node scratchshot.js` 
 
 ### Before pushing changes or receiving changes
