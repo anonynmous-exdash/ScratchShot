@@ -51,10 +51,42 @@ async function getCommandInput(){
                 });
 
                 delete projectData["targets"];
-                
+
                 fs.writeFileSync("./project/project.json", JSON.stringify(projectData, null, 2));
             } catch (error) {
                 console.error("Error unpackaging project.sb3:", error);
+            }
+            break;
+
+        case("package"):
+            try {
+                if(!fs.existsSync("./project")) {
+                    console.error("Project folder does not exist. Please unpackage a project first.");
+                    return;
+                }
+                const zip = new AdmZip();
+                let projectJson = fs.readFileSync("./project/project.json", "utf-8");
+                let projectData = JSON.parse(projectJson);
+
+                projectData["targets"] = [];
+                const targetFiles = fs.readdirSync("./project/targets");
+                targetFiles.forEach((file) => {
+                    const targetId = file.replace(".json", "");
+                    const targetData = JSON.parse(fs.readFileSync(`./project/targets/${file}`, "utf-8"));
+                    projectData["targets"][targetId] = targetData;
+                });
+
+                fs.readdirSync("./project").forEach((file) => {
+                    if(["jpg","jpeg","svg","png", "mp3", "wav"].includes(file.split(".").pop())){
+                        zip.addLocalFile(`./project/${file}`);
+                    }
+                });
+
+                zip.addFile("project.json", JSON.stringify(projectData));
+                zip.writeZip("project.sb3");
+                console.log("Packaged project folder to project.sb3");
+            } catch (error) {
+                console.error("Error packaging project:", error);
             }
             break;
     }
