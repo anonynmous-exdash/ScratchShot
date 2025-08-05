@@ -1,7 +1,7 @@
-import AdmZip from 'adm-zip'
-import readline from 'readline'
+import AdmZip from 'npm:adm-zip'
+import readline from 'node:readline'
 
-import fs from 'fs'
+import fs from 'node:fs'
 
 async function getUserInput(question) {
   const rl = readline.createInterface({
@@ -24,6 +24,9 @@ async function getCommandInput(){
             console.log("chwd - Change working directory to given path")
             console.log("unpackage - Unpackage project.sb3 from the working directory to the project folder")
             console.log("package - Package the project folder from the working directory to the project.sb3")
+            console.log("exit - Exit ScratchShot")
+            console.log("clear/cls - Clear the console")
+            console.log("help - Show this help message")
             break;
         case("chwd"):
             if(input[1]){
@@ -89,8 +92,20 @@ async function getCommandInput(){
                 console.error("Error packaging project:", error);
             }
             break;
-    }
+        case("exit"):
+            console.log("Exiting ScratchShot...");
+            process.exit(0);
+            break;
+        case("clear"):
+        case("cls"):
+            console.clear();
+            break;
+        default:
+            console.log("Unknown command. Type 'help' for a list of commands.");
+            break;
+        }
 }
+console.log("ScratchShot - v1.0.0")
 while(true){
     await getCommandInput()
 }

@@ -1,0 +1,19 @@
+{
+  "version": "5",
+  "specifiers": {
+    "npm:adm-zip@*": "0.5.16",
+    "npm:adm-zip@~0.5.16": "0.5.16"
+  },
+  "npm": {
+    "adm-zip@0.5.16": {
+      "integrity": "sha512-TGw5yVi4saajsSEgz25grObGHEUaDrniwvA2qwSC060KfqGPdglhvPMA2lPIoxs3PQIItj2iag35fONcQqgUaQ=="
+    }
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:adm-zip@~0.5.16"
+      ]
+    }
+  }
+}
