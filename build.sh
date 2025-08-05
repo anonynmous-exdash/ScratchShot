@@ -3,3 +3,4 @@ cd src
 npm i -g deno
 npm i adm-zip
 deno compile --allow-all scratchshot.js 
+deno compile --allow-all --target x86_64-pc-windows-msvc src/scratchshot.js
